@@ -47,7 +47,8 @@ var update_sval = function () {
 };
 var populate_table = function(e) {
   e.preventDefault();
-  //$("#table-body").html("");
+  // $("#table-body").html("");
+  $(".filterable").remove();
   sval = update_sval();
   t1 = sval[0]-1;
   t2 = sval[1];
