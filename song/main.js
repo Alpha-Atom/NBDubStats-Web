@@ -21,3 +21,5 @@ var getSongInfo = function() {
     $("p#dump").html(data);
   });
 }
+
+getSongInfo();
