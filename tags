@@ -1,8 +1,0 @@
-!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
-array	/Users/Matt/Work/NBDubStats-Web/main.js	/^var array = Array.apply(null, {length: 24}).map(Number.call, Number).map(function(n){return n+1});$/;"	v	language:JavaScript
-e	/Users/Matt/Work/NBDubStats-Web/main.js	/^var e = mySlider.slider().on('slide', update_sval).data('slider');$/;"	v	language:JavaScript
-labels	/Users/Matt/Work/NBDubStats-Web/main.js	/^var labels = Array.apply(null, {length:24}).map(Number.call, Number).map(function(n){return n+":00"});$/;"	v	language:JavaScript
-mySlider	/Users/Matt/Work/NBDubStats-Web/main.js	/^var mySlider = $("input.slider").slider({$/;"	v	language:JavaScript
-prev_t1	/Users/Matt/Work/NBDubStats-Web/main.js	/^var prev_t1 = -1;$/;"	v	language:JavaScript
-prev_t2	/Users/Matt/Work/NBDubStats-Web/main.js	/^var prev_t2 = -1;$/;"	v	language:JavaScript
-update_sval	/Users/Matt/Work/NBDubStats-Web/main.js	/^var update_sval = function () {$/;"	f	language:JavaScript
