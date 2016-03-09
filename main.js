@@ -2,6 +2,8 @@ var array = Array.apply(null, {length: 24}).map(Number.call, Number).map(functio
 var labels = Array.apply(null, {length:24}).map(Number.call, Number).map(function(n){return n+":00"});
 var prev_t1 = -1;
 var prev_t2 = -1;
+var filter_enabled = false;
+var filter_text = "";
 var mySlider = $("input.slider").slider({
   ticks:array,
   ticks_labels:labels,
@@ -14,6 +16,21 @@ $("#update").on('click', function(e) {
   populate_table(e);
   update_sval();
 });
+$("#filter").on('keyup', function(e) {
+  var filter_value = $("#filter").val();
+  filter_table(filter_value);
+});
+var filter_table = function (filter_val) {
+  $(".filterable").each(function (i) {
+    var firstChild = $(this).children().first();
+    var songname = firstChild.children().first().text();
+    if (songname.toLowerCase().indexOf(filter_val.toLowerCase()) == -1 && filter_val) {
+      $(this).css('display', 'none');
+    } else {
+      $(this).css('display', 'table-row');
+    }
+  });
+};
 var update_sval = function () {
   sval = e.getValue();
   time1 = (sval[0]-1)+":00";
@@ -30,7 +47,7 @@ var update_sval = function () {
 };
 var populate_table = function(e) {
   e.preventDefault();
-  $("#table-body").html("");
+  //$("#table-body").html("");
   sval = update_sval();
   t1 = sval[0]-1;
   t2 = sval[1];
@@ -69,26 +86,27 @@ var populate_table = function(e) {
     song_list = data.songs;
     tr_list = [];
     for (var i = 0; i < song_list.length; i++) {
-     var new_tr = document.createElement("tr");
-     var name_td = document.createElement("td");
-     name_td.innerHTML = '<a href="http://mattcoles.io/nbdubstats/song/?s=' + song_list[i].fkidtype + '">' + song_list[i].song_name + '</a>';
-     var total_td = document.createElement("td");
-     total_td.innerHTML = song_list[i].score;
-     var grabs_td = document.createElement("td");
-     grabs_td.innerHTML = song_list[i].grabs;
-     var plays_td = document.createElement("td");
-     plays_td.innerHTML = song_list[i].plays;
-     var pct_td = document.createElement("td");
-     pct_td.innerHTML = song_list[i].pct_up;
-     var users_td = document.createElement("td");
-     users_td.innerHTML = song_list[i].users;
-     new_tr.appendChild(name_td);
-     new_tr.appendChild(total_td);
-     new_tr.appendChild(grabs_td);
-     new_tr.appendChild(plays_td);
-     new_tr.appendChild(pct_td);
-     new_tr.appendChild(users_td);
-     tr_list.push(new_tr);
+      var new_tr = document.createElement("tr");
+      new_tr.className = "filterable";
+      var name_td = document.createElement("td");
+      name_td.innerHTML = '<a href="http://mattcoles.io/nbdubstats/song/?s=' + song_list[i].fkidtype + '">' + song_list[i].song_name + '</a>';
+      var total_td = document.createElement("td");
+      total_td.innerHTML = song_list[i].score;
+      var grabs_td = document.createElement("td");
+      grabs_td.innerHTML = song_list[i].grabs;
+      var plays_td = document.createElement("td");
+      plays_td.innerHTML = song_list[i].plays;
+      var pct_td = document.createElement("td");
+      pct_td.innerHTML = song_list[i].pct_up;
+      var users_td = document.createElement("td");
+      users_td.innerHTML = song_list[i].users;
+      new_tr.appendChild(name_td);
+      new_tr.appendChild(total_td);
+      new_tr.appendChild(grabs_td);
+      new_tr.appendChild(plays_td);
+      new_tr.appendChild(pct_td);
+      new_tr.appendChild(users_td);
+      tr_list.push(new_tr);
     }
     $("#table-body").hide();
     for (var j = 0; j < tr_list.length; j++) {
