@@ -13,7 +13,7 @@ var getUrlParameter = function(sParam) {
     }
 };
 
-var song = getUrlParameter(s);
+var song = getUrlParameter("s");
 
 var getSongInfo = function() {
   $.getJSON("http://mattcoles.io:3000/song/?s=" + song, function(data) {
