@@ -71,7 +71,7 @@ var populate_table = function(e) {
     for (var i = 0; i < song_list.length; i++) {
      var new_tr = document.createElement("tr");
      var name_td = document.createElement("td");
-     name_td.innerHTML = song_list[i].song_name;
+     name_td.innerHTML = '<a href="http://mattcoles.io/nbdubstats/song/?s=' + song_list[i].fkidtype + '">' + song_list[i].song_name + '</a>';
      var total_td = document.createElement("td");
      total_td.innerHTML = song_list[i].score;
      var grabs_td = document.createElement("td");
