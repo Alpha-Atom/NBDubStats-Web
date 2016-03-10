@@ -19,6 +19,7 @@ var songname;
 var plays = {};
 var timesupdubs = {};
 var pct_ups = {};
+var timestamps = [];
 
 var getSongInfo = function() {
   $.getJSON("http://mattcoles.io:3000/song/?s=" + song, function(data) {
@@ -29,6 +30,7 @@ var getSongInfo = function() {
       songname = data[key].songinfo.name;
       $("#songname").html(songname);
       $("title").html(songname);
+      timestamps.push(Number.parseFloat(key));
       hour = (new Date(Number.parseFloat(key))).getHours();
       if (plays[hour] !== undefined) {
         plays[hour] += 1;
@@ -114,6 +116,47 @@ var renderCharts = function () {
   var playsChart = new Chart(ctx).Line(data);
   var dubsChart  = new Chart(ctx2).Line(data2);
   var pctChart = new Chart(ctx3).Line(data3);
+  timestamps.sort(function(a, b) {
+    return b - a;
+  });
+  timestamps.forEach(function(ts) {
+    var new_tr = document.createElement("tr");
+    var date_td = document.createElement("td");
+    date_td.innerHTML = new Date(ts);
+    var timesince = document.createElement("td");
+    timesince.innerHTML = timeSince(new Date(ts));
+    new_tr.appendChild(date_td);
+    new_tr.appendChild(timesince);
+    $("#playtimes").append(new_tr);
+  });
+}
+
+function timeSince(date) {
+
+    var seconds = Math.floor((new Date() - date) / 1000);
+
+    var interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+        return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
 }
 
 getSongInfo();

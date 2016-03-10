@@ -26,7 +26,20 @@
         </div>
         <div id="container" style="text-align:center">
             <div class="alert alert-warning" id="unloaded" role="alert" style="width:50%;margin-left:auto;margin-right:auto;">Loading song...</div>
-            <h5>Most Popular Hours by Plays</h5>
+            <h5>Song Play Times</h5>
+            <table class="table table-hover" style="width:40%;margin-right:auto;margin-left:auto;text-align:left">
+                <thead>
+                    <tr>
+                        <td>Played At</td>
+                        <td>Time Since</td>
+                    </tr>
+                </thead>
+                <tbody id="playtimes">
+
+                </tbody>
+            </table>
+            <hr />
+            <h5>Total Number of Plays at Hours</h5>
             <canvas id="chart1" style="width:60%;height:50%"></canvas>
             <hr />
             <h5>Average % Updubbed at Hours</h5>
