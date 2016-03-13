@@ -47,6 +47,16 @@ var getSongInfo = function() {
       } else {
         pct_ups[hour] = (updubs/users)*100;
       }
+      if (data[key].songinfo.type == "youtube") {
+        var source = "https://youtube.com/embed/" + data[key].songinfo.fkid;
+        $("#sc").css('display', 'none');
+        $("#yt").attr('src', source);
+      } else if (data[key].songinfo.type == "soundcloud") {
+        var apiurl = "https://api.soundcloud.com/tracks/" + data[key].songinfo.fkid;
+        var source = "https://w.soundcloud.com/player/?url=" + encodeURIComponent(apiurl) + "&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true";
+        $("#yt").css('display', 'none');
+        $("#sc").attr('src', source);
+      }
     });
     renderCharts();
   });
