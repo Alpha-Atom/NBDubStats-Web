@@ -49,6 +49,7 @@ var populate_table = function(e) {
   e.preventDefault();
   // $("#table-body").html("");
   $(".filterable").remove();
+  $(".spinner").show();
   sval = update_sval();
   t1 = sval[0]-1;
   t2 = sval[1];
@@ -113,7 +114,8 @@ var populate_table = function(e) {
     for (var j = 0; j < tr_list.length; j++) {
       $("#table-body").append(tr_list[j]);
     }
-    $("#table-body").fadeIn();
+    $(".spinner").hide();
+    $("#table-body").show();
     $("#gen").html("Data was generated at: " + (new Date(Number.parseFloat(data.generated))).toString() + " dating back to " + (new Date(1457423565270)).toString() + ".");
   });
   e.target.blur();
